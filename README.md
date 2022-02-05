@@ -1,4 +1,3 @@
-# Test
-Test from my environment 
-# This is my master branch
-This is not master anymore, now is different
+# Testing jiaguadosnykscan
+Scans should be uploaded from Snyk CLI when using the file build.sh 
+
