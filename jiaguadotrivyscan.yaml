@@ -16,7 +16,7 @@ spec:
         app: jiaguadotrivyscan
     spec:
       containers:
-        - name: docker_hub_reg
+        - name: docker-hub-reg
           image: jiaguado/testing:trivyscan
           imagePullPolicy: Always
       #secret has been created with:
