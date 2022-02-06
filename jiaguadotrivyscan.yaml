@@ -14,12 +14,12 @@ spec:
     metadata:
       labels:
         app: jiaguadotrivyscan
+    spec:
       containers:
-        - name: private-reg-container-name
+        - name: docker_hub_reg
           image: jiaguado/testing:trivyscan
           imagePullPolicy: Always
       #secret has been created with:
       #kubectl create secret docker-registry regcred --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <your-namespace>
       imagePullSecrets:
         - name: regcred
-
