@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jiaguadotrivyscan
+  namespace: testing
+  labels:
+    app: jiaguadotrivyscan
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jiaguadotrivyscan
+  containers:
+  - name: private-reg-container-name
+    image: jiaguado/testing:trivyscan
+  imagePullSecrets:
+  - name: regcred
+#secret has been created with:
+#kubectl create secret docker-registry regcred --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <your-namespace>
