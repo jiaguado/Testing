@@ -19,7 +19,8 @@ spec:
         - name: trivy-scan-docker
           image: jiaguado/testing:trivyscan
           imagePullPolicy: Always
-          command: ["/bin/bash"] 
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
       #secret has been created with:
       #kubectl create secret docker-registry regcred --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <your-namespace>
       imagePullSecrets:
