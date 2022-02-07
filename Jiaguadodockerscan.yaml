@@ -30,6 +30,7 @@ spec:
             - name: var-run
               mountPath: /host/var/run
               readOnly: true
+          # Need to mount containerd as using AKS    
       volumes:
         - name: containerdsocket
           hostPath:
