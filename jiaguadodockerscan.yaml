@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jiaguadodockerscan
+  namespace: testing
+  labels:
+    app: jiaguadodockerscan
+spec:
+  selector:
+    matchLabels:
+      app: jiaguadodockerscan
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jiaguadodockerscan
+    spec:
+      containers:
+        - name: docker-scan-docker
+          image: jiaguado/testing:dockerscan
+          imagePullPolicy: Always
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          volumeMounts:
+            - name: "docker-socket-mount"
+              mountPath: "/var/run/docker.sock"
+      volumes:
+        - name: "docker-socket-mount"
+          hostPath:
+            path: "/var/run/docker.sock"         
+      #secret has been created with:
+      #kubectl create secret docker-registry regcred --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <your-namespace>
+      imagePullSecrets:
+        - name: regcred
