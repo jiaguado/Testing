@@ -27,17 +27,17 @@ spec:
           volumeMounts:
             - name: containerdsocket
               mountPath: /var/run/containerd/containerd.sock
-            - mountPath: /host/var/run
-              name: var-run
+            - name: var-run
+              mountPath: /host/var/run
               readOnly: true
       volumes:
         - name: containerdsocket
           hostPath:
             path: /var/run/containerd/containerd.sock
           name: containerdsocket
-            - hostPath:
-                path: /var/run
-              name: var-run
+        - name: var-run
+          hostPath:
+            path: /var/run
       #secret has been created with:
       #kubectl create secret docker-registry regcred --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <your-namespace>
       imagePullSecrets:
