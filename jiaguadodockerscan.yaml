@@ -21,13 +21,23 @@ spec:
           imagePullPolicy: Always
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
+          env:
+            - name: DD_CRI_SOCKET_PATH
+              value: /var/run/containerd/containerd.sock
           volumeMounts:
-            - name: "docker-socket-mount"
-              mountPath: "/var/run/docker.sock"
+            - name: containerdsocket
+              mountPath: /var/run/containerd/containerd.sock
+            - mountPath: /host/var/run
+              name: var-run
+              readOnly: true
       volumes:
-        - name: "docker-socket-mount"
+        - name: containerdsocket
           hostPath:
-            path: "/var/run/docker.sock"         
+            path: /var/run/containerd/containerd.sock
+          name: containerdsocket
+            - hostPath:
+                path: /var/run
+              name: var-run
       #secret has been created with:
       #kubectl create secret docker-registry regcred --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <your-namespace>
       imagePullSecrets:
