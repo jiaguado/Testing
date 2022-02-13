@@ -46,8 +46,8 @@ spec:
         command: [ "/bin/bash", "-c", "--" ]
         args: [ "while true; do sleep 30; done;" ]
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: postgres-db
+        - mountPath: /var/lib/clair/data
+          name: clair-db
       containers:
       - name: clair-db
         securityContext:
@@ -55,17 +55,17 @@ spec:
         image: arminc/clair-db:$(date +%Y-%m-%d)
         imagePullPolicy: IfNotPresent
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: postgres-db
+        - mountPath: /var/lib/clair/data
+          name: clair-db
         ports:
         - containerPort: 6060
           protocol: TCP
         - containerPort: 6061
           protocol: TCP
       volumes:
-      - name: postgres-db
+      - name: clair-db
         persistentVolumeClaim:
-          claimName: aqua-db-pvc
+          claimName: clair-db-pvc
 ---
 apiVersion: apps/v1
 kind: Deployment
