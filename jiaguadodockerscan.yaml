@@ -24,10 +24,6 @@ spec:
           volumeMounts:
             - name: "docker-socket-mount"
               mountPath: "/var/run/docker.sock"
-            - name: "var-run"
-              mountPath: /host/var/run
-              readOnly: true
-          # Need to mount containerd as using AKS    
       volumes:
         - name: "docker-socket-mount"
           hostPath:
