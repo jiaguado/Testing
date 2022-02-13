@@ -21,22 +21,18 @@ spec:
           imagePullPolicy: Always
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ]
-          env:
-            - name: DD_CRI_SOCKET_PATH
-              value: /var/run/containerd/containerd.sock
           volumeMounts:
-            - name: containerdsocket
-              mountPath: /var/run/containerd/containerd.sock
-            - name: var-run
+            - name: "docker-socket-mount"
+              mountPath: "/var/run/docker.sock"
+            - name: "var-run"
               mountPath: /host/var/run
               readOnly: true
           # Need to mount containerd as using AKS    
       volumes:
-        - name: containerdsocket
+        - name: "docker-socket-mount"
           hostPath:
-            path: /var/run/containerd/containerd.sock
-          name: containerdsocket
-        - name: var-run
+            path: "/var/run/docker.sock"
+        - name: "var-run"
           hostPath:
             path: /var/run
       #secret has been created with:
