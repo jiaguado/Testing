@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jiaguadosnykscan
+  namespace: testing
+  labels:
+    app: jiaguadosnykscan
+spec:
+  selector:
+    matchLabels:
+      app: jiaguadosnykscan
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jiaguadosnyckscan
+    spec:
+      containers:
+        - name: docker-scan-docker
+          image: jiaguado/testing:snykscan
+          imagePullPolicy: Always
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          volumeMounts:
+            - name: "docker-socket-mount"
+              mountPath: "/var/run/docker.sock"
+      volumes:
+        - name: "docker-socket-mount"
+          hostPath:
+            path: "/var/run/docker.sock"
+        - name: "var-run"
+          hostPath:
+            path: /var/run
+      #secret has been created with:
+      #kubectl create secret docker-registry regcred --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <your-namespace>
+      imagePullSecrets:
+        - name: regcred
