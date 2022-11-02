@@ -1,0 +1,3 @@
+FROM blankoff/openssl-3.0.0:latest
+LABEL purpose="testing"
+LABEL issue="OpenSSL"
