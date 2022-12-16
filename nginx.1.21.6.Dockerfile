@@ -1,3 +1,3 @@
-FROM nginx:1.21.6
+FROM nginx:1.23.2
 LABEL purpose="testing"
 LABEL flabour="nginx"
