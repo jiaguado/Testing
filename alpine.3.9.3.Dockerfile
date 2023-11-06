@@ -1,3 +1,3 @@
-FROM alpine:3.9.3
+FROM alpine:3.14.4
 LABEL purpose="testing"
 LABEL flabour="alpine"
